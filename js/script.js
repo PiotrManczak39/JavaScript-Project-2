@@ -51,11 +51,33 @@ const showPage = (list, page) => {
    functionality to the pagination buttons.
 ***/
 
-// const appendPageLinks = (list) => {
-//   let pagesTotal = Math.floor(list.length / 10) + 1;
-//   let page = document.createElement('div');
-//   pageBig.appendChild(page);
-// }
 
+const appendPageLinks = (list) => {
+  let pagesTotal = Math.floor(list.length / 10) + 1;
+  let page = document.createElement('div');
+  page.className = 'pagination';
+  pageBig.appendChild(page);
+  let ul = document.createElement('ul');
+  page.appendChild(ul);
+  for (let i=0; i<pagesTotal; i++) {
+    let li = document.createElement('li');
+    let anchor = document.createElement('a');
+    let liNumber = i+1;
+    anchor.textContent = liNumber;
+    anchor.href = '#';
+    li.appendChild(anchor);
+    ul.appendChild(li);
+  }
+
+  const anchors = document.getElementsByTagName('a');
+  for ( let i=0; i<anchors.length; i++) {
+    anchors[i].addEventListener('click', (e) => {
+      showPage(list, anchors[i].textContent);
+      event.target.className = 'active';
+    });
+  }
+}
+
+appendPageLinks(students);
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
