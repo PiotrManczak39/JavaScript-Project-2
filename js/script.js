@@ -35,12 +35,25 @@ const pageBig = document.querySelector('.page');
        "invoke" the function
 ***/
 
+const searchBar = (htmlElement) => {
+  let div = document.createElement('div');
+  let input = document.createElement('input');
+  let button = document.createElement('button');
+  input.placeholder = "Search for students...";
+  button.textContent = 'Search';
+  div.className = 'student-search';
+  div.appendChild(input);
+  div.appendChild(button);
+  htmlElement.appendChild(div);
+}
+
 const showPage = (list, page) => {
   let lower = (page * 10) - 10;
   let upper = lower + 9;
   for (let i = lower; i<=upper; i++) {
     list[i].style.display = 'block';
   }
+  searchBar(document.querySelector('.page-header'));
 }
 
 students.forEach( student => student.style.display = 'none');
