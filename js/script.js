@@ -18,7 +18,6 @@ FSJS project 2 - List Filter and Pagination
 ***/
 
 const students = document.querySelectorAll('li');
-const studenList = document.querySelector('.student-list');
 const pageBig = document.querySelector('.page');
 
 /***
@@ -35,7 +34,6 @@ const pageBig = document.querySelector('.page');
        that will be passed into the parens later when you call or
        "invoke" the function
 ***/
-students.forEach( student => student.style.display = 'none');
 
 const showPage = (list, page) => {
   let lower = (page * 10) - 10;
@@ -45,6 +43,9 @@ const showPage = (list, page) => {
   }
 }
 
+students.forEach( student => student.style.display = 'none');
+
+showPage(students, 1);
 
 /***
    Create the `appendPageLinks function` to generate, append, and add
@@ -68,12 +69,17 @@ const appendPageLinks = (list) => {
     li.appendChild(anchor);
     ul.appendChild(li);
   }
-
   const anchors = document.getElementsByTagName('a');
+  anchors[0].className = 'active';
+
   for ( let i=0; i<anchors.length; i++) {
     anchors[i].addEventListener('click', (e) => {
-      showPage(list, anchors[i].textContent);
+      for (let i=0; i<anchors.length; i++) {
+        anchors[i].className = '';
+      }
       event.target.className = 'active';
+      students.forEach( student => student.style.display = 'none');
+      showPage(list, anchors[i].textContent);
     });
   }
 }
