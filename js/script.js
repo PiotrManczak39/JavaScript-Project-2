@@ -68,13 +68,15 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
   let term = e.target.value.toLowerCase();
   for (let i=0; i<studentsNames.length; i++) {
     let name = studentsNames[i].textContent.toLowerCase();
-    if (Array.from(name).indexOf(term) == -1) {
-      let studentInfo = studentsNames[i].parentNode.parentNode;
-      studentInfo.style.display = 'none';
-    } else {
-      let studentInfo = studentsNames[i].parentNode.parentNode;
-      studentInfo.style.display = 'block';
-    }
+    Array.from(name).forEach( item => {
+      if (item.indexOf(term) == -1) {
+        let studentInfo = studentsNames[i].parentNode.parentNode;
+        studentInfo.style.display = 'none';
+      } else {
+        let studentInfo = studentsNames[i].parentNode.parentNode;
+        studentInfo.style.display = 'block';
+      }
+    });
   }
 });
 
