@@ -19,6 +19,7 @@ FSJS project 2 - List Filter and Pagination
 
 const students = document.querySelectorAll('li');
 const pageBig = document.querySelector('.page');
+const searchBox = document.querySelector('.page-header');
 
 /***
    Create the `showPage` function to hide all of the items in the
@@ -53,12 +54,39 @@ const showPage = (list, page) => {
   for (let i = lower; i<=upper; i++) {
     list[i].style.display = 'block';
   }
-  searchBar(document.querySelector('.page-header'));
 }
 
-students.forEach( student => student.style.display = 'none');
+searchBar(searchBox);
+/*--------------------------------------------------------
+                      Search engine
+--------------------------------------------------------*/
 
+const searchButton = document.getElementsByTagName('button')[0];
+const searchBoxInput = document.getElementsByTagName('input')[0];
+const studentsNames = document.getElementsByTagName('h3');
+document.querySelector('.student-search').addEventListener('keyup', (e) => {
+  let term = e.target.value.toLowerCase();
+  for (let i=0; i<studentsNames.length; i++) {
+    let name = studentsNames[i].textContent.toLowerCase();
+    if (Array.from(name).indexOf(term) == -1) {
+      let studentInfo = studentsNames[i].parentNode.parentNode;
+      studentInfo.style.display = 'none';
+    } else {
+      let studentInfo = studentsNames[i].parentNode.parentNode;
+      studentInfo.style.display = 'block';
+    }
+  }
+});
+
+/*-----------------------------------------------------------
+          Hiding all students and showing only 10
+------------------------------------------------------------*/
+
+students.forEach( student => student.style.display = 'none');
 showPage(students, 1);
+
+
+
 
 /***
    Create the `appendPageLinks function` to generate, append, and add
