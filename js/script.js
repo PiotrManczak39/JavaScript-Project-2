@@ -66,13 +66,9 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
   let newArray = [];
   for (let i=0; i<studentsNames.length; i++) {
     let name = studentsNames[i].textContent.toLowerCase();
-    if (name.indexOf(term) == -1) {
-      let studentInfo = studentsNames[i].parentNode.parentNode;
-      studentInfo.style.display = 'none';
-    } else {
-      let studentInfo = studentsNames[i].parentNode.parentNode;
+    if (name.indexOf(term) !== -1) {
+       let studentInfo = studentsNames[i].parentNode.parentNode;
       newArray.push(studentInfo);
-      studentInfo.style.display = 'block';
     }
   }
   if (newArray == '') {
@@ -84,7 +80,6 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
     const pagination = document.querySelector('.pagination');
     pagination.style.display = 'none';
     noResults.style.display = 'block';
-  }
   appendPageLinks(newArray);
 });
 
