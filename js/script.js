@@ -103,21 +103,17 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
     if (name.indexOf(term) !== -1) {
        let studentInfo = studentsNames[i].parentNode.parentNode;
       newArray.push(studentInfo);
-      const pagination = document.querySelector('.pagination');
-      pageBig.removeChild(pagination);
     }
   }
   if (newArray == '') {
-    const list = document.querySelector('.student-list');
-    list.style.display = 'none';
     const pagination = document.querySelector('.pagination');
-    pageBig.removeChild(pagination);
+    pagination.style.display = 'none';
     noResults.style.display = 'block';
   } else {
     noResults.style.display = 'none';
     showPage(students, 1);
+    appendPageLinks(newArray);
   }
-  appendPageLinks(newArray);
 });
 
 appendPageLinks(students);
