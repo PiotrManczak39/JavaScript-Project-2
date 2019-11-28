@@ -69,13 +69,15 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
     if (name.indexOf(term) !== -1) {
        let studentInfo = studentsNames[i].parentNode.parentNode;
       newArray.push(studentInfo);
+      const pagination = document.querySelector('.pagination');
+      pageBig.removeChild(pagination);
     }
   }
   if (newArray == '') {
     const list = document.querySelector('.student-list');
     list.style.display = 'none';
     const pagination = document.querySelector('.pagination');
-    pagination.style.display = 'none';
+    pageBig.removeChild(pagination);
     noResults.style.display = 'block';
   } 
   appendPageLinks(newArray);
