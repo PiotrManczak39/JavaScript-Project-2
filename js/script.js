@@ -52,37 +52,6 @@ noResults.style.display = 'none';
 students.forEach( student => student.style.display = 'none');
 showPage(students, 1);
 
-/*--------------------------------------------------------
-                      Search engine
---------------------------------------------------------*/
-
-const searchButton = document.getElementsByTagName('button')[0];
-const searchBoxInput = document.getElementsByTagName('input')[0];
-const studentsNames = document.getElementsByTagName('h3');
-
-
-document.querySelector('.student-search').addEventListener('keyup', (e) => {
-  let term = e.target.value.toLowerCase();
-  let newArray = [];
-  for (let i=0; i<studentsNames.length; i++) {
-    let name = studentsNames[i].textContent.toLowerCase();
-    if (name.indexOf(term) !== -1) {
-       let studentInfo = studentsNames[i].parentNode.parentNode;
-      newArray.push(studentInfo);
-      const pagination = document.querySelector('.pagination');
-      pageBig.removeChild(pagination);
-    }
-  }
-  if (newArray == '') {
-    const list = document.querySelector('.student-list');
-    list.style.display = 'none';
-    const pagination = document.querySelector('.pagination');
-    pageBig.removeChild(pagination);
-    noResults.style.display = 'block';
-  } 
-  appendPageLinks(newArray);
-});
-
 /*-----------------------------------------------------------
           appendPageLinks Function
 ------------------------------------------------------------*/
@@ -117,6 +86,40 @@ const appendPageLinks = (list) => {
     });
   }
 }
+
+/*----------------------------------------------------------------------------------------
+                                 Search engine
+-------------------------------------------------------------------------------------*/
+
+const searchButton = document.getElementsByTagName('button')[0];
+const searchBoxInput = document.getElementsByTagName('input')[0];
+const studentsNames = document.getElementsByTagName('h3');
+
+
+document.querySelector('.student-search').addEventListener('keyup', (e) => {
+  let term = e.target.value.toLowerCase();
+  let newArray = [];
+  for (let i=0; i<studentsNames.length; i++) {
+    let name = studentsNames[i].textContent.toLowerCase();
+    if (name.indexOf(term) !== -1) {
+       let studentInfo = studentsNames[i].parentNode.parentNode;
+      newArray.push(studentInfo);
+      const pagination = document.querySelector('.pagination');
+      pageBig.removeChild(pagination);
+    }
+  }
+  if (newArray == '') {
+    const list = document.querySelector('.student-list');
+    list.style.display = 'none';
+    const pagination = document.querySelector('.pagination');
+    pageBig.removeChild(pagination);
+    noResults.style.display = 'block';
+  } else {
+    noResults.style.display = 'none';
+    showPage(students, 1);
+  }
+  appendPageLinks(newArray);
+});
 
 appendPageLinks(students);
 
