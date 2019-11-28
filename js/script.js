@@ -105,7 +105,7 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
       newArray.push(studentInfo);
     }
   }
-  showPage(newArray);
+  appendPageLinks(newArray);
 });
 
 appendPageLinks(students);
