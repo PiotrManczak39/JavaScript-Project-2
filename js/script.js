@@ -105,15 +105,7 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
       newArray.push(studentInfo);
     }
   }
-  if (newArray == '') {
-    const pagination = document.querySelector('.pagination');
-    pagination.style.display = 'none';
-    noResults.style.display = 'block';
-  } else {
-    noResults.style.display = 'none';
-    showPage(students, 1);
-    appendPageLinks(newArray);
-  }
+  showPage(newArray);
 });
 
 appendPageLinks(students);
