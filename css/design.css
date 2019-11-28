@@ -95,11 +95,18 @@ body{
     border-bottom: none;
   }
 
+.no-results {
+  text-align: center;
+  color: red;
+  font-size: 2em;
+  padding: 150px 0;
+}
+
 .pagination{
   margin: 40px 0 0 0;
   text-align: center;
 }
- 
+
   .pagination li{
     display: inline;
   }

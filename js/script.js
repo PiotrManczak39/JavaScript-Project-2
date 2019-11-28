@@ -6,35 +6,16 @@ FSJS project 2 - List Filter and Pagination
 // Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
 
 
-/***
-   Add your global variables that store the DOM elements you will
-   need to reference and/or manipulate.
 
-   But be mindful of which variables should be global and which
-   should be locally scoped to one of the two main functions you're
-   going to create. A good general rule of thumb is if the variable
-   will only be used inside of a function, then it can be locally
-   scoped to that function.
-***/
 
 const students = document.querySelectorAll('li');
 const pageBig = document.querySelector('.page');
 const searchBox = document.querySelector('.page-header');
+const noResults = document.querySelector('.no-results');
 
-/***
-   Create the `showPage` function to hide all of the items in the
-   list except for the ten you want to show.
-
-   Pro Tips:
-     - Keep in mind that with a list of 54 students, the last page
-       will only display four.
-     - Remember that the first student has an index of 0.
-     - Remember that a function `parameter` goes in the parens when
-       you initially define the function, and it acts as a variable
-       or a placeholder to represent the actual function `argument`
-       that will be passed into the parens later when you call or
-       "invoke" the function
-***/
+/*-----------------------------------------------------------
+             Function creating searchBar
+------------------------------------------------------------*/
 
 const searchBar = (htmlElement) => {
   let div = document.createElement('div');
@@ -48,6 +29,11 @@ const searchBar = (htmlElement) => {
   htmlElement.appendChild(div);
 }
 
+
+/*-----------------------------------------------------------
+            showPage Function
+------------------------------------------------------------*/
+
 const showPage = (list, page) => {
   let lower = (page * 10) - 10;
   let upper = lower + 9;
@@ -56,7 +42,16 @@ const showPage = (list, page) => {
   }
 }
 
+/*-----------------------------------------------------------
+          Appending searchBar, Hiding 'No results'
+          Hiding students except for first 10
+------------------------------------------------------------*/
+
 searchBar(searchBox);
+noResults.style.display = 'none';
+students.forEach( student => student.style.display = 'none');
+showPage(students, 1);
+
 /*--------------------------------------------------------
                       Search engine
 --------------------------------------------------------*/
@@ -64,6 +59,8 @@ searchBar(searchBox);
 const searchButton = document.getElementsByTagName('button')[0];
 const searchBoxInput = document.getElementsByTagName('input')[0];
 const studentsNames = document.getElementsByTagName('h3');
+
+
 document.querySelector('.student-search').addEventListener('keyup', (e) => {
   let term = e.target.value.toLowerCase();
   let newArray = [];
@@ -78,23 +75,23 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
       studentInfo.style.display = 'block';
     }
   }
+  if (newArray == '') {
+
+    //Displaying 'No results' communicate
+
+    const list = document.querySelector('.student-list');
+    list.style.display = 'none';
+    const pagination = document.querySelector('.pagination');
+    pagination.style.display = 'none';
+    noResults.style.display = 'block';
+  }
+  pageBig.removeChild(document.querySelector('.pagination'));
+  appendPageLinks(newArray);
 });
 
 /*-----------------------------------------------------------
-          Hiding all students and showing only 10
+          appendPageLinks Function
 ------------------------------------------------------------*/
-
-students.forEach( student => student.style.display = 'none');
-showPage(students, 1);
-
-
-
-
-/***
-   Create the `appendPageLinks function` to generate, append, and add
-   functionality to the pagination buttons.
-***/
-
 
 const appendPageLinks = (list) => {
   let pagesTotal = Math.floor(list.length / 10) + 1;
