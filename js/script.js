@@ -85,7 +85,6 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
     pagination.style.display = 'none';
     noResults.style.display = 'block';
   }
-  pageBig.removeChild(document.querySelector('.pagination'));
   appendPageLinks(newArray);
 });
 
