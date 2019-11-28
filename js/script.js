@@ -78,7 +78,9 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
     pagination.style.display = 'none';
     noResults.style.display = 'block';
   } else {
-    showPage(newArray);
+    showPage(newArray, 1);
+    appendPageLinks(newArray);
+    noResults.style.display = 'none';
   }
   appendPageLinks(newArray);
 });
