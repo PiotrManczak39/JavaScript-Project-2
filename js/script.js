@@ -80,6 +80,8 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
     const pagination = document.querySelector('.pagination');
     pagination.style.display = 'none';
     noResults.style.display = 'block';
+  }
+  showPage(newArray, 1);
   appendPageLinks(newArray);
 });
 
