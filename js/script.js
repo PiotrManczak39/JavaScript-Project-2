@@ -12,6 +12,10 @@ const students = document.querySelectorAll('li');
 const pageBig = document.querySelector('.page');
 const searchBox = document.querySelector('.page-header');
 const noResults = document.querySelector('.no-results');
+const searchButton = document.getElementsByTagName('button')[0];
+const searchBoxInput = document.getElementsByTagName('input')[0];
+const studentsNames = document.getElementsByTagName('h3');
+
 
 /*-----------------------------------------------------------
              Function creating searchBar
@@ -90,11 +94,6 @@ const appendPageLinks = (list) => {
 /*----------------------------------------------------------------------------------------
                                  Search engine
 -------------------------------------------------------------------------------------*/
-
-const searchButton = document.getElementsByTagName('button')[0];
-const searchBoxInput = document.getElementsByTagName('input')[0];
-const studentsNames = document.getElementsByTagName('h3');
-
 
 document.querySelector('.student-search').addEventListener('keyup', (e) => {
   let term = e.target.value.toLowerCase();
