@@ -106,7 +106,7 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
     }
   }
   students.forEach(item => item.style.display = 'none' );
-  shoePage(newArray);
+  showPage(newArray, 1);
   appendPageLinks(newArray);
 });
 
