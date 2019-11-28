@@ -72,16 +72,14 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
     }
   }
   if (newArray == '') {
-
-    //Displaying 'No results' communicate
-
     const list = document.querySelector('.student-list');
     list.style.display = 'none';
     const pagination = document.querySelector('.pagination');
     pagination.style.display = 'none';
     noResults.style.display = 'block';
+  } else {
+    showPage(newArray);
   }
-  showPage(newArray, 1);
   appendPageLinks(newArray);
 });
 
