@@ -44,6 +44,8 @@ const showPage = (list, page) => {
   for (let i = lower; i<=upper; i++) {
     if (list[i]) {
       list[i].style.display = 'block';
+    } else {
+      console.log('Nie ma li');
     }
   }
 }
@@ -111,6 +113,9 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
     if (name.indexOf(term) !== -1) {
       let studentInfo = studentsNames[i].parentNode.parentNode;
       newArray.push(studentInfo);
+    } else {
+      let studentInfo = studentsNames[i].parentNode.parentNode;
+      studentInfo.style.display = 'none';
     }
   }
   //displaying "No results"
@@ -120,10 +125,10 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
   } else {
     noResults.style.display = 'none';
     document.querySelector('.student-list').style.display = 'block';
+    showPage(newArray, 1);
   }
   //Clearing pagination and applying new one
-  pagination.style.display = 'none';
-  showPage(newArray, 1);
+  pageBig.removeChild(pagination);
   appendPageLinks(newArray);
 });
 
