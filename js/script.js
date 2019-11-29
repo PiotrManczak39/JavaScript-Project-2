@@ -12,9 +12,8 @@ const students = document.querySelectorAll('li');
 const pageBig = document.querySelector('.page');
 const searchBox = document.querySelector('.page-header');
 const noResults = document.querySelector('.no-results');
-const searchButton = document.getElementsByTagName('button')[0];
-const searchBoxInput = document.getElementsByTagName('input')[0];
 const studentsNames = document.getElementsByTagName('h3');
+
 
 
 
@@ -43,7 +42,9 @@ const showPage = (list, page) => {
   let lower = (page * 10) - 10;
   let upper = lower + 9;
   for (let i = lower; i<=upper; i++) {
-    list[i].style.display = 'block';
+    if (list[i]) {
+      list[i].style.display = 'block';
+    }
   }
 }
 
@@ -92,9 +93,13 @@ const appendPageLinks = (list) => {
   }
 }
 
+appendPageLinks(students);
 /*----------------------------------------------------------------------------------------
                                  Search engine
 -------------------------------------------------------------------------------------*/
+const pagination = document.querySelector('.pagination');
+const searchButton = document.getElementsByTagName('button')[0];
+const searchBoxInput = document.getElementsByTagName('input')[0];
 
 document.querySelector('.student-search').addEventListener('keyup', (e) => {
   let term = e.target.value.toLowerCase();
@@ -102,15 +107,21 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
   for (let i=0; i<studentsNames.length; i++) {
     let name = studentsNames[i].textContent.toLowerCase();
     if (name.indexOf(term) !== -1) {
-       let studentInfo = studentsNames[i].parentNode.parentNode;
+      let studentInfo = studentsNames[i].parentNode.parentNode;
       newArray.push(studentInfo);
     }
   }
-  document.querySelector('.pagination').style.display = 'none';
+  if (newArray == '') {
+    noResults.style.display = 'block';
+    document.querySelector('.student-list').style.display = 'none';
+  } else {
+    noResults.style.display = 'none';
+    document.querySelector('.student-list').style.display = 'block';
+  }
+  pagination.style.display = 'none';
   showPage(newArray, 1);
   appendPageLinks(newArray);
 });
 
-appendPageLinks(students);
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
