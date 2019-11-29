@@ -6,7 +6,7 @@ FSJS project 2 - List Filter and Pagination
 // Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
 
 
-
+//Global variables
 
 const students = document.querySelectorAll('li');
 const pageBig = document.querySelector('.page');
@@ -101,16 +101,19 @@ const pagination = document.querySelector('.pagination');
 const searchButton = document.getElementsByTagName('button')[0];
 const searchBoxInput = document.getElementsByTagName('input')[0];
 
+//Event listener attached to the search box
 document.querySelector('.student-search').addEventListener('keyup', (e) => {
   let term = e.target.value.toLowerCase();
   let newArray = [];
   for (let i=0; i<studentsNames.length; i++) {
     let name = studentsNames[i].textContent.toLowerCase();
+    //words comparison
     if (name.indexOf(term) !== -1) {
       let studentInfo = studentsNames[i].parentNode.parentNode;
       newArray.push(studentInfo);
     }
   }
+  //displaying "No results"
   if (newArray == '') {
     noResults.style.display = 'block';
     document.querySelector('.student-list').style.display = 'none';
@@ -118,6 +121,7 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
     noResults.style.display = 'none';
     document.querySelector('.student-list').style.display = 'block';
   }
+  //Clearing pagination and applying new one
   pagination.style.display = 'none';
   showPage(newArray, 1);
   appendPageLinks(newArray);
