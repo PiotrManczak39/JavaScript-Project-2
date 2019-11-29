@@ -13,6 +13,7 @@ const pageBig = document.querySelector('.page');
 const searchBox = document.querySelector('.page-header');
 const noResults = document.querySelector('.no-results');
 
+
 /*-----------------------------------------------------------
              Function creating searchBar
 ------------------------------------------------------------*/
