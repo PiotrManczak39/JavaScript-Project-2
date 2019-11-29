@@ -12,6 +12,10 @@ const students = document.querySelectorAll('li');
 const pageBig = document.querySelector('.page');
 const searchBox = document.querySelector('.page-header');
 const noResults = document.querySelector('.no-results');
+const searchButton = document.getElementsByTagName('button')[0];
+const searchBoxInput = document.getElementsByTagName('input')[0];
+const studentsNames = document.getElementsByTagName('h3');
+
 
 
 /*-----------------------------------------------------------
@@ -53,43 +57,6 @@ noResults.style.display = 'none';
 students.forEach( student => student.style.display = 'none');
 showPage(students, 1);
 
-/*--------------------------------------------------------
-                      Search engine
---------------------------------------------------------*/
-
-const searchButton = document.getElementsByTagName('button')[0];
-const searchBoxInput = document.getElementsByTagName('input')[0];
-const studentsNames = document.getElementsByTagName('h3');
-
-
-document.querySelector('.student-search').addEventListener('keyup', (e) => {
-  let term = e.target.value.toLowerCase();
-  let newArray = [];
-  for (let i=0; i<studentsNames.length; i++) {
-    let name = studentsNames[i].textContent.toLowerCase();
-    if (name.indexOf(term) == -1) {
-      let studentInfo = studentsNames[i].parentNode.parentNode;
-      studentInfo.style.display = 'none';
-    } else {
-      let studentInfo = studentsNames[i].parentNode.parentNode;
-      newArray.push(studentInfo);
-      studentInfo.style.display = 'block';
-    }
-  }
-  if (newArray == '') {
-
-    //Displaying 'No results' communicate
-
-    const list = document.querySelector('.student-list');
-    list.style.display = 'none';
-    const pagination = document.querySelector('.pagination');
-    pagination.style.display = 'none';
-    noResults.style.display = 'block';
-  }
-  pageBig.removeChild(document.querySelector('.pagination'));
-  appendPageLinks(newArray);
-});
-
 /*-----------------------------------------------------------
           appendPageLinks Function
 ------------------------------------------------------------*/
@@ -124,6 +91,25 @@ const appendPageLinks = (list) => {
     });
   }
 }
+
+/*----------------------------------------------------------------------------------------
+                                 Search engine
+-------------------------------------------------------------------------------------*/
+
+document.querySelector('.student-search').addEventListener('keyup', (e) => {
+  let term = e.target.value.toLowerCase();
+  let newArray = [];
+  for (let i=0; i<studentsNames.length; i++) {
+    let name = studentsNames[i].textContent.toLowerCase();
+    if (name.indexOf(term) !== -1) {
+       let studentInfo = studentsNames[i].parentNode.parentNode;
+      newArray.push(studentInfo);
+    }
+  }
+  document.querySelector('.pagination').style.display = 'none';
+  showPage(newArray, 1);
+  appendPageLinks(newArray);
+});
 
 appendPageLinks(students);
 
