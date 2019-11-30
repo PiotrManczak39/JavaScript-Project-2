@@ -11,7 +11,6 @@ FSJS project 2 - List Filter and Pagination
 const students = document.querySelectorAll('li');
 const pageBig = document.querySelector('.page');
 const searchBox = document.querySelector('.page-header');
-const noResults = document.querySelector('.no-results');
 const studentsNames = document.getElementsByTagName('h3');
 
 
@@ -33,6 +32,18 @@ const searchBar = (htmlElement) => {
   htmlElement.appendChild(div);
 }
 
+/*-----------------------------------------------------------
+            creating "No Results" using JavaScript
+------------------------------------------------------------*/
+
+let div = document.createElement('div');
+div.className = 'no-results';
+let h2 = document.createElement('h2');
+h2.textContent = 'No Results';
+div.appendChild(h2);
+pageBig.appendChild(div);
+const noResults = document.querySelector('.no-results');
+noResults.style.display = 'none';
 
 /*-----------------------------------------------------------
             showPage Function
@@ -45,7 +56,7 @@ const showPage = (list, page) => {
     if (list[i]) {
       list[i].style.display = 'block';
     } else {
-      console.log('Nie ma li');
+      console.log('No li. I am sorry');
     }
   }
 }
@@ -56,7 +67,6 @@ const showPage = (list, page) => {
 ------------------------------------------------------------*/
 
 searchBar(searchBox);
-noResults.style.display = 'none';
 students.forEach( student => student.style.display = 'none');
 showPage(students, 1);
 
@@ -96,6 +106,7 @@ const appendPageLinks = (list) => {
 }
 
 appendPageLinks(students);
+
 /*----------------------------------------------------------------------------------------
                                  Search engine
 -------------------------------------------------------------------------------------*/
@@ -122,15 +133,19 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
   if (newArray == '') {
     noResults.style.display = 'block';
     document.querySelector('.student-list').style.display = 'none';
+    pagination.style.display = 'none';
   } else {
+  //hiding "No results"
     noResults.style.display = 'none';
     document.querySelector('.student-list').style.display = 'block';
     showPage(newArray, 1);
   }
   //Clearing pagination and applying new one
-  pageBig.removeChild(pagination);
+  pagination.style.display = 'none';
+  //And another try using .removeChild() - it shows fault in the console
+  document.querySelector('.page').removeChild(pagination);
   appendPageLinks(newArray);
 });
 
-
+console.log(pagination);
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
