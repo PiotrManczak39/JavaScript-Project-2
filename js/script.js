@@ -143,6 +143,7 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
   //Clearing pagination and applying new one
   pagination.style.display = 'none';
   //And another try using .removeChild() - it shows fault in the console
-  document.querySelector('.page').removeChild(pagination);
+  let parent = document.querySelector('.pagination').parentNode;
+  parent.removeChild(pagination);
   appendPageLinks(newArray);
 });
