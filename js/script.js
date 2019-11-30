@@ -116,6 +116,7 @@ const searchBoxInput = document.getElementsByTagName('input')[0];
 
 //Event listener attached to the search box
 document.querySelector('.student-search').addEventListener('keyup', (e) => {
+  const pagination = document.querySelector('.pagination');
   let term = e.target.value.toLowerCase();
   let newArray = [];
   for (let i=0; i<studentsNames.length; i++) {
@@ -130,7 +131,7 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
     }
   }
   //displaying "No results"
-  if (newArray == '') {
+  if (newArray.length === 0) {
     noResults.style.display = 'block';
     document.querySelector('.student-list').style.display = 'none';
     pagination.style.display = 'none';
@@ -138,12 +139,12 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
   //hiding "No results"
     noResults.style.display = 'none';
     document.querySelector('.student-list').style.display = 'block';
+    pagination.style.display = 'none';
     showPage(newArray, 1);
   }
   //Clearing pagination and applying new one
   pagination.style.display = 'none';
   //And another try using .removeChild() - it shows fault in the console
-  let parent = document.querySelector('.pagination').parentNode;
-  parent.removeChild(pagination);
+  pageBig.removeChild(pagination);
   appendPageLinks(newArray);
 });
