@@ -146,6 +146,3 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
   document.querySelector('.page').removeChild(pagination);
   appendPageLinks(newArray);
 });
-
-console.log(pagination);
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
