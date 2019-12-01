@@ -75,7 +75,14 @@ showPage(students, 1);
 ------------------------------------------------------------*/
 
 const appendPageLinks = (list) => {
-  let pagesTotal = Math.floor(list.length / 10) + 1;
+
+  let x = list.length % 10;
+  let pagesTotal;
+  if (x == 0) {
+    pagesTotal = list.length / 10;
+  } else {
+    pagesTotal = Math.floor(list.length / 10) + 1;
+  }
   let page = document.createElement('div');
   page.className = 'pagination';
   pageBig.appendChild(page);
@@ -110,7 +117,7 @@ appendPageLinks(students);
 /*----------------------------------------------------------------------------------------
                                  Search engine
 -------------------------------------------------------------------------------------*/
-const pagination = document.querySelector('.pagination');
+
 const searchButton = document.getElementsByTagName('button')[0];
 const searchBoxInput = document.getElementsByTagName('input')[0];
 
@@ -118,6 +125,7 @@ const searchBoxInput = document.getElementsByTagName('input')[0];
 document.querySelector('.student-search').addEventListener('keyup', (e) => {
   const pagination = document.querySelector('.pagination');
   let term = e.target.value.toLowerCase();
+  //Array will be used for reduced amount of students
   let newArray = [];
   for (let i=0; i<studentsNames.length; i++) {
     let name = studentsNames[i].textContent.toLowerCase();
@@ -134,16 +142,14 @@ document.querySelector('.student-search').addEventListener('keyup', (e) => {
   if (newArray.length === 0) {
     noResults.style.display = 'block';
     document.querySelector('.student-list').style.display = 'none';
-    pagination.style.display = 'none';
   } else {
-  //hiding "No results"
+  //hiding "No results" and getting li back on display
     noResults.style.display = 'none';
     document.querySelector('.student-list').style.display = 'block';
-    pagination.style.display = 'none';
     showPage(newArray, 1);
   }
   //Clearing pagination and applying new one
-  pagination.style.display = 'none';
+  // pagination.style.display = 'none';
   //And another try using .removeChild() - it shows fault in the console
   pageBig.removeChild(pagination);
   appendPageLinks(newArray);
