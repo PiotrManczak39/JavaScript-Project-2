@@ -97,9 +97,23 @@ body{
 
 .no-results {
   text-align: center;
+  font-family: 'Varela Round', sans-serif;
   color: red;
-  font-size: 2em;
+  font-size: 3em;
+  font-weight: 800;
   padding: 150px 0;
+  background-image: url('../images/background.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 20px;
+  box-shadow: 5px -3px 15px 15px lightgray;
+  text-shadow: 3px -3px pink;
+  opacity: .75;
+}
+
+.no-results h2 {
+  opacity: .85;
 }
 
 .pagination{

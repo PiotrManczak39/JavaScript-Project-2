@@ -42,6 +42,7 @@ let h2 = document.createElement('h2');
 h2.textContent = 'No Results';
 div.appendChild(h2);
 pageBig.appendChild(div);
+
 const noResults = document.querySelector('.no-results');
 noResults.style.display = 'none';
 
